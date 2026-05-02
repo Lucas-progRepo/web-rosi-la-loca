@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #f4ecdf;
+  --surface: #fbf6ec;
+  --ink: #1f1410;
+  --ink-soft: rgba(31, 20, 16, 0.65);
+  --accent: #a83828;
+  --accent-soft: #e8c9b8;
+  --line: rgba(31, 20, 16, 0.12);
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Entrance animations - ease-out feels responsive */
+.fade-in {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: fadeUp 600ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in {
+    animation: fadeOnly 300ms ease forwards;
+    transform: none;
+  }
+  @keyframes fadeOnly {
+    to { opacity: 1; }
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
