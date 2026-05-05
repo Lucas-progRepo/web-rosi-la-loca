@@ -7,50 +7,41 @@ const fraunces = Fraunces({
   weight: ['400', '600', '900'],
   style: ['normal', 'italic'],
   variable: '--font-fraunces',
-  display: 'swap'
+  display: 'swap',
 });
 
 const manrope = Manrope({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
   variable: '--font-manrope',
-  display: 'swap'
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
   title: 'Rosi La Loca — Taberna de cocina honesta en Madrid',
-  description:
-    'Rosi La Loca es una taberna en Madrid con cocina de producto, brasa y carácter. Platos para compartir, vinos honestos y mesa larga.',
-  keywords: [
-    'Rosi La Loca',
-    'restaurante Madrid',
-    'taberna Madrid',
-    'cocina de producto',
-    'brasa Madrid',
-    'restaurante para compartir'
-  ],
+  description: 'Rosi La Loca es una taberna en Madrid con cocina de producto, brasa y carácter. Platos para compartir, vinos honestos y mesa larga.',
+  keywords: ['Rosi La Loca', 'restaurante Madrid', 'taberna Madrid', 'cocina de producto', 'brasa Madrid', 'restaurante para compartir'],
   openGraph: {
     title: 'Rosi La Loca — Taberna de cocina honesta en Madrid',
-    description:
-      'Taberna madrileña de cocina honesta y desenfadada. Producto, fuego y memoria.',
+    description: 'Taberna madrileña con cocina de producto, brasa y carácter.',
+    type: 'website',
     locale: 'es_ES',
-    type: 'website'
-  }
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const ldJson = {
+  const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Restaurant',
     name: 'Rosi La Loca',
-    servesCuisine: 'Spanish',
+    description: 'Taberna de cocina honesta en Madrid',
+    servesCuisine: ['Española', 'De mercado', 'Brasa'],
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Madrid',
-      addressCountry: 'ES'
+      addressCountry: 'ES',
     },
-    description:
-      'Taberna en Madrid con cocina de producto, brasa y carácter. Platos para compartir.'
+    telephone: '+34675811548',
   };
 
   return (
@@ -58,7 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-bg text-ink font-body antialiased">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {children}
       </body>
