@@ -10,71 +10,133 @@
   --accent: #a83828;
   --accent-soft: #e8c9b8;
   --line: rgba(31, 20, 16, 0.12);
-  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-out-quart: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-html, body {
-  background-color: var(--bg);
-  color: var(--ink);
-}
+html { background: var(--bg); }
 
-::selection {
-  background-color: var(--accent);
-  color: var(--bg);
-}
+::selection { background: var(--accent); color: var(--bg); }
 
-/* Stagger entrance for hero */
-.hero-stagger > * {
-  opacity: 0;
-  transform: translateY(8px);
-  animation: heroIn 500ms var(--ease-out-strong) forwards;
+/* Stagger entrance — hero */
+.stagger {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 500ms ease-out, transform 500ms var(--ease-out-quart);
 }
-.hero-stagger > *:nth-child(1) { animation-delay: 0ms; }
-.hero-stagger > *:nth-child(2) { animation-delay: 80ms; }
-.hero-stagger > *:nth-child(3) { animation-delay: 160ms; }
-.hero-stagger > *:nth-child(4) { animation-delay: 240ms; }
-
-@keyframes heroIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
+@starting-style {
+  .stagger { opacity: 0; transform: translateY(8px); }
+}
+/* Fallback for browsers without @starting-style */
+@supports not (transition-behavior: allow-discrete) {
+  .stagger { animation: staggerIn 500ms var(--ease-out-quart) both; }
+  @keyframes staggerIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 }
 
-/* Badge spinning text */
-.badge-circle {
-  transition: transform 300ms var(--ease-out-strong);
-  transform: rotate(-8deg);
+.stagger-1 { transition-delay: 0ms; animation-delay: 0ms; }
+.stagger-2 { transition-delay: 80ms; animation-delay: 80ms; }
+.stagger-3 { transition-delay: 160ms; animation-delay: 160ms; }
+.stagger-4 { transition-delay: 240ms; animation-delay: 240ms; }
+
+/* Pillar stagger */
+.pillar-stagger {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 500ms ease-out, transform 500ms var(--ease-out-quart);
 }
-.badge-circle:hover {
-  transform: rotate(-6deg);
+@starting-style {
+  .pillar-stagger { opacity: 0; transform: translateY(12px); }
+}
+@supports not (transition-behavior: allow-discrete) {
+  .pillar-stagger { animation: staggerIn 500ms var(--ease-out-quart) both; }
+}
+.pillar-1 { transition-delay: 0ms; animation-delay: 0ms; }
+.pillar-2 { transition-delay: 60ms; animation-delay: 60ms; }
+.pillar-3 { transition-delay: 120ms; animation-delay: 120ms; }
+
+/* Badge rotation */
+.badge-rotate {
+  transform: rotate(-8deg);
+  transition: transform 300ms var(--ease-out-quart);
+  transform-origin: center;
+}
+@media (hover: hover) and (pointer: fine) {
+  .badge-rotate:hover { transform: rotate(-6deg); }
 }
 
-/* Pillars hover */
-.pillar {
-  transition: transform 300ms var(--ease-out-strong);
+/* Badge slow rotation animation on the textPath circle */
+.badge-spin {
+  animation: badgeSpin 28s linear infinite;
+  transform-origin: center;
+}
+@keyframes badgeSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Pillar hover */
+.pillar-card {
+  transition: transform 300ms var(--ease-out-quart);
   transform-origin: top;
 }
 @media (hover: hover) and (pointer: fine) {
-  .pillar:hover {
-    transform: translateY(-4px);
+  .pillar-card:hover { transform: translateY(-4px); }
+}
+
+/* CTA primary */
+.cta-primary {
+  transition: transform 200ms var(--ease-out-quart), box-shadow 200ms var(--ease-out-quart);
+}
+@media (hover: hover) and (pointer: fine) {
+  .cta-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -8px rgba(168, 56, 40, 0.4);
+  }
+}
+.cta-primary:active {
+  transform: scale(0.97);
+  transition: transform 150ms var(--ease-out-quart);
+}
+
+/* CTA secondary */
+.cta-secondary {
+  transition: transform 200ms var(--ease-out-quart), border-color 200ms ease, color 200ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .cta-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+.cta-secondary:active {
+  transform: scale(0.97);
+  transition: transform 150ms var(--ease-out-quart);
+}
+
+/* Contact links */
+.contact-link {
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 200ms ease, text-underline-offset 200ms ease, color 200ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .contact-link:hover {
+    text-decoration-color: var(--accent);
+    text-underline-offset: 6px;
+    color: var(--accent);
   }
 }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .hero-stagger > * {
-    animation: heroFade 300ms ease forwards;
-    transform: none;
-  }
-  @keyframes heroFade {
-    to { opacity: 1; }
-  }
-  .badge-circle, .pillar {
-    transition: opacity 200ms ease;
-    transform: none !important;
-  }
-  .badge-circle:hover, .pillar:hover {
-    transform: none !important;
+  .stagger, .pillar-stagger { animation: none; transition: opacity 200ms ease; }
+  .badge-rotate, .pillar-card, .cta-primary, .cta-secondary { transition: opacity 200ms ease; }
+  .badge-spin { animation: none; }
+  @media (hover: hover) and (pointer: fine) {
+    .badge-rotate:hover, .pillar-card:hover, .cta-primary:hover { transform: none; }
   }
 }
