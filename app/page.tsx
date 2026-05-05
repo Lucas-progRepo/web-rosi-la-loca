@@ -1,254 +1,163 @@
 import Link from 'next/link';
 
-const pillars = [
-  {
-    n: '01',
-    title: 'Producto de mercado',
-    text: 'Pescado, carne y verdura de temporada elegidos cada mañana.'
-  },
-  {
-    n: '02',
-    title: 'Cocina viva',
-    text: 'Recetas que respetan el origen y se atreven con guiños contemporáneos.'
-  },
-  {
-    n: '03',
-    title: 'Mesa compartida',
-    text: 'Raciones pensadas para comer juntos, sin protocolos.'
-  }
-];
+const PHONE = '+34675811548';
+const PHONE_TEL = 'tel:+34675811548';
+const PHONE_WA = 'https://wa.me/34675811548';
 
-function Divider() {
-  return <div className="h-1 w-20 bg-accent mx-auto" aria-hidden="true" />;
-}
-
-function CircularBadge() {
-  // SVG badge with text on circular path
+export default function Home() {
   return (
-    <div className="badge-circle relative inline-flex items-center justify-center w-[120px] h-[120px] md:w-[140px] md:h-[140px]">
-      <svg
-        viewBox="0 0 140 140"
-        className="absolute inset-0 w-full h-full"
-        aria-hidden="true"
-      >
-        <circle
-          cx="70"
-          cy="70"
-          r="68"
-          fill="none"
-          stroke="#a83828"
-          strokeWidth="2"
-        />
-        <defs>
-          <path
-            id="badgePath"
-            d="M 70,70 m -54,0 a 54,54 0 1,1 108,0 a 54,54 0 1,1 -108,0"
-          />
-        </defs>
-        <text
-          fill="#a83828"
-          style={{
-            fontFamily: 'var(--font-manrope), sans-serif',
-            fontSize: '11px',
-            fontWeight: 600,
-            letterSpacing: '0.22em',
-            textTransform: 'uppercase'
-          }}
-        >
-          <textPath href="#badgePath" startOffset="0">
-            La Loca · Madrid · Cocina viva · La Loca · Madrid · Cocina viva ·
-          </textPath>
-        </text>
-      </svg>
-      <span
-        className="font-display italic font-black text-accent text-2xl"
-        aria-hidden="true"
-      >
-        R
-      </span>
-    </div>
-  );
-}
-
-export default function Page() {
-  return (
-    <main className="min-h-screen bg-bg text-ink overflow-x-hidden">
-      {/* HERO */}
-      <section
-        id="inicio"
-        className="relative pt-20 pb-24 md:pt-28 md:pb-32 px-6 md:px-10"
-      >
+    <main className="relative overflow-x-hidden">
+      {/* ───────── HERO ───────── */}
+      <section className="relative min-h-screen flex items-center px-6 md:px-12 py-24 md:py-32">
         {/* Watermark */}
         <span
           aria-hidden="true"
-          className="pointer-events-none select-none absolute left-[-2vw] top-[18%] font-display italic font-black text-ink whitespace-nowrap"
-          style={{
-            fontSize: 'clamp(8rem, 22vw, 18rem)',
-            opacity: 0.08,
-            lineHeight: 1
-          }}
+          className="pointer-events-none select-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-display italic font-black text-ink leading-none whitespace-nowrap"
+          style={{ fontSize: 'clamp(8rem, 22vw, 18rem)', opacity: 0.08 }}
         >
           Rosi
         </span>
 
-        <div className="relative max-w-6xl mx-auto">
-          {/* Top row: small label + badge */}
-          <div className="flex items-start justify-between gap-6 mb-12 md:mb-20">
-            <div className="font-body text-xs md:text-sm uppercase tracking-[0.2em] text-ink-soft">
-              Madrid · Est. cocina honesta
-            </div>
-            <div className="shrink-0">
-              <CircularBadge />
-            </div>
+        {/* Badge circular */}
+        <div className="absolute top-8 right-6 md:top-12 md:right-12 z-10">
+          <div className="badge-rotate">
+            <svg width="130" height="130" viewBox="0 0 130 130" className="overflow-visible">
+              <defs>
+                <path id="badgeCircle" d="M 65,65 m -48,0 a 48,48 0 1,1 96,0 a 48,48 0 1,1 -96,0" />
+              </defs>
+              <circle cx="65" cy="65" r="60" fill="none" stroke="#a83828" strokeWidth="2" />
+              <circle cx="65" cy="65" r="4" fill="#a83828" />
+              <g className="badge-spin" style={{ transformOrigin: '65px 65px' }}>
+                <text fill="#a83828" style={{ fontFamily: 'var(--font-manrope), system-ui, sans-serif', fontSize: '10px', letterSpacing: '0.18em', fontWeight: 500, textTransform: 'uppercase' }}>
+                  <textPath href="#badgeCircle" startOffset="0">
+                    La Loca · Madrid · Cocina viva · La Loca · Madrid · Cocina viva ·
+                  </textPath>
+                </text>
+              </g>
+            </svg>
           </div>
+        </div>
 
-          <div className="hero-stagger max-w-4xl">
-            <p className="font-body text-xs md:text-sm uppercase tracking-[0.2em] text-accent mb-6">
-              — Cocina sin complejos · Madrid
-            </p>
-            <h1
-              className="font-display font-black text-ink leading-[0.95] tracking-tight"
-              style={{ fontSize: 'clamp(3rem, 8vw, 6rem)' }}
+        <div className="relative z-[2] max-w-6xl mx-auto w-full">
+          <p className="stagger stagger-1 text-xs uppercase tracking-[0.2em] text-accent font-medium mb-6">
+            — Cocina sin complejos · Madrid
+          </p>
+          <h1
+            className="stagger stagger-2 font-display font-black text-ink leading-[0.95] tracking-tight"
+            style={{ fontSize: 'clamp(3rem, 8vw, 6rem)' }}
+          >
+            Rosi <span className="italic font-normal text-accent">La Loca</span>
+          </h1>
+          <p
+            className="stagger stagger-3 mt-8 max-w-xl text-ink-soft leading-relaxed"
+            style={{ fontSize: '1.0625rem' }}
+          >
+            Una taberna con carácter donde el producto manda y la cocina se sirve sin filtros. Sabores honestos, fuego y mucha alegría.
+          </p>
+          <div className="stagger stagger-4 mt-10 flex flex-wrap gap-3">
+            <a
+              href="#contacto"
+              className="cta-primary inline-flex items-center gap-2 bg-accent text-bg px-7 py-4 text-sm font-medium tracking-wide uppercase rounded-full"
             >
-              Rosi <span className="italic">La Loca</span>
-            </h1>
-            <p
-              className="mt-8 max-w-xl text-ink-soft leading-relaxed"
-              style={{ fontSize: '1.0625rem' }}
+              Cómo llegar
+              <span aria-hidden="true">→</span>
+            </a>
+            <a
+              href={PHONE_TEL}
+              className="cta-secondary inline-flex items-center gap-2 border border-ink/20 text-ink px-7 py-4 text-sm font-medium tracking-wide uppercase rounded-full"
             >
-              Una taberna con carácter donde el producto manda y la cocina se sirve sin filtros.
-              Sabores honestos, fuego y mucha alegría.
-            </p>
-            <div className="mt-10 flex flex-wrap gap-3">
-              <a
-                href="#contacto"
-                className="inline-flex items-center gap-2 bg-accent text-bg px-7 py-3.5 rounded-full font-body font-medium text-sm transition-transform duration-200 ease-out-strong hover:-translate-y-0.5 hover:shadow-[0_8px_24px_-8px_rgba(168,56,40,0.4)] active:scale-[0.97] active:translate-y-0"
-              >
-                Cómo llegar
-                <span aria-hidden="true">→</span>
-              </a>
-              <a
-                href="#sobre"
-                className="inline-flex items-center gap-2 border border-ink/20 text-ink px-7 py-3.5 rounded-full font-body font-medium text-sm transition-all duration-200 ease-out-strong hover:border-accent hover:text-accent active:scale-[0.97]"
-              >
-                Conocer la casa
-              </a>
-            </div>
+              Llamar
+            </a>
           </div>
         </div>
       </section>
 
-      <Divider />
+      {/* Separador */}
+      <div className="h-1 w-20 bg-accent mx-auto" aria-hidden="true" />
 
-      {/* SOBRE NOSOTROS */}
-      <section
-        id="sobre"
-        className="relative bg-surface border-t border-b border-line py-24 md:py-32 px-6 md:px-10 mt-24 md:mt-32"
-      >
+      {/* ───────── SOBRE ───────── */}
+      <section id="sobre" className="bg-surface border-y border-line py-24 md:py-32 px-6 md:px-12">
         <div className="max-w-5xl mx-auto">
-          <p className="font-body text-xs uppercase tracking-[0.2em] text-accent mb-6">
+          <p className="text-xs uppercase tracking-[0.2em] text-accent font-medium mb-6">
             — 01 / Sobre nosotros
           </p>
           <div className="grid md:grid-cols-12 gap-10 md:gap-16 items-start">
             <h2
-              className="md:col-span-7 font-display font-black leading-[1.02] tracking-tight"
+              className="md:col-span-7 font-display font-black text-ink leading-[1.05] tracking-tight"
               style={{ fontSize: 'clamp(2rem, 4.5vw, 3.25rem)' }}
             >
-              La cocina de Rosi, <span className="italic font-normal">sin medias tintas</span>
+              La cocina de Rosi, sin medias tintas
             </h2>
             <div className="md:col-span-5 md:pt-3">
-              <p
-                className="text-ink-soft leading-[1.7]"
-                style={{ fontSize: '1.0625rem' }}
-              >
-                Rosi La Loca nace del gusto por la mesa larga, la conversación que se alarga y
-                el plato que se comparte. Aquí cocinamos con producto de temporada, recetas con
-                raíces y la libertad de quien no se toma demasiado en serio. Madrid en estado
-                puro, con un punto de locura.
+              <p className="text-ink-soft leading-[1.7]" style={{ fontSize: '1.0625rem' }}>
+                Rosi La Loca nace del gusto por la mesa larga, la conversación que se alarga y el plato que se comparte. Aquí cocinamos con producto de temporada, recetas con raíces y la libertad de quien no se toma demasiado en serio. Madrid en estado puro, con un punto de locura.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* PROPUESTA GASTRONÓMICA */}
-      <section
-        id="cocina"
-        className="relative bg-accent-soft py-24 md:py-32 px-6 md:px-10 overflow-hidden"
-      >
-        {/* Decorative quotes */}
+      {/* Separador */}
+      <div className="h-1 w-20 bg-accent mx-auto" aria-hidden="true" />
+
+      {/* ───────── PROPUESTA GASTRONÓMICA ───────── */}
+      <section id="cocina" className="relative bg-accent-soft py-24 md:py-32 px-6 md:px-12 overflow-hidden">
+        {/* Comillas decorativas */}
         <span
           aria-hidden="true"
-          className="pointer-events-none select-none absolute left-4 top-8 font-display italic font-black text-accent"
-          style={{
-            fontSize: 'clamp(6rem, 12vw, 10rem)',
-            opacity: 0.3,
-            lineHeight: 1
-          }}
+          className="pointer-events-none select-none absolute font-display italic font-black text-accent leading-none"
+          style={{ fontSize: 'clamp(6rem, 12vw, 10rem)', opacity: 0.3, top: '2rem', left: '1rem' }}
         >
           “
         </span>
         <span
           aria-hidden="true"
-          className="pointer-events-none select-none absolute right-4 bottom-4 font-display italic font-black text-accent"
-          style={{
-            fontSize: 'clamp(6rem, 12vw, 10rem)',
-            opacity: 0.3,
-            lineHeight: 1
-          }}
+          className="pointer-events-none select-none absolute font-display italic font-black text-accent leading-none"
+          style={{ fontSize: 'clamp(6rem, 12vw, 10rem)', opacity: 0.3, bottom: '2rem', right: '1.5rem' }}
         >
           ”
         </span>
 
-        <div className="relative max-w-5xl mx-auto">
-          <p className="font-body text-xs uppercase tracking-[0.2em] text-accent mb-6">
+        <div className="relative max-w-6xl mx-auto">
+          <p className="text-xs uppercase tracking-[0.2em] text-accent font-medium mb-6">
             — 02 / Nuestra cocina
           </p>
-          <h2
-            className="font-display font-black leading-[0.98] tracking-tight max-w-3xl"
-            style={{ fontSize: 'clamp(2rem, 4.5vw, 3.25rem)' }}
-          >
-            Producto, fuego <span className="italic">y memoria</span>
-          </h2>
-          <p
-            className="mt-8 max-w-2xl text-ink-soft leading-[1.7]"
-            style={{ fontSize: '1.0625rem' }}
-          >
-            Trabajamos con género de mercado, brasa cuando toca y una despensa que cambia con
-            las estaciones. Platos para compartir, vinos honestos y postres que merecen una
-            segunda ronda.
-          </p>
+          <div className="grid md:grid-cols-12 gap-10 md:gap-16 items-end mb-16 md:mb-20">
+            <h2
+              className="md:col-span-8 font-display font-black text-ink leading-[1.02] tracking-tight"
+              style={{ fontSize: 'clamp(2rem, 4.5vw, 3.25rem)' }}
+            >
+              Producto, <span className="italic font-normal">fuego</span> y memoria
+            </h2>
+            <p className="md:col-span-4 text-ink-soft leading-[1.7]" style={{ fontSize: '1.0625rem' }}>
+              Trabajamos con género de mercado, brasa cuando toca y una despensa que cambia con las estaciones. Platos para compartir, vinos honestos y postres que merecen una segunda ronda.
+            </p>
+          </div>
 
-          {/* Pillars asymmetric grid */}
-          <div className="mt-16 md:mt-20 grid md:grid-cols-12 gap-8 md:gap-10">
-            {pillars.map((p, i) => (
+          {/* Pilares */}
+          <div className="grid md:grid-cols-3 gap-8 md:gap-10">
+            {[
+              { n: '01', title: 'Producto de mercado', text: 'Pescado, carne y verdura de temporada elegidos cada mañana.' },
+              { n: '02', title: 'Cocina viva', text: 'Recetas que respetan el origen y se atreven con guiños contemporáneos.' },
+              { n: '03', title: 'Mesa compartida', text: 'Raciones pensadas para comer juntos, sin protocolos.' },
+            ].map((p, i) => (
               <article
                 key={p.n}
-                className={`pillar bg-surface/60 backdrop-blur-[1px] rounded-2xl p-7 md:p-8 border border-ink/5 ${
-                  i === 0
-                    ? 'md:col-span-5'
-                    : i === 1
-                    ? 'md:col-span-7 md:mt-10'
-                    : 'md:col-span-6 md:col-start-4'
-                }`}
+                className={`pillar-card pillar-stagger pillar-${i + 1} border-t border-ink/15 pt-6 md:pt-8`}
               >
-                <span
-                  className="font-display italic font-black text-accent block leading-none"
-                  style={{ fontSize: '3.75rem', opacity: 0.4 }}
-                  aria-hidden="true"
+                <div
+                  className="font-display italic font-black text-accent leading-none mb-5"
+                  style={{ fontSize: '3.5rem', opacity: 0.4 }}
                 >
                   {p.n}
-                </span>
+                </div>
                 <h3
-                  className="mt-4 font-display font-semibold tracking-tight"
+                  className="font-display font-semibold text-ink mb-3 leading-tight"
                   style={{ fontSize: 'clamp(1.25rem, 2vw, 1.5rem)' }}
                 >
                   {p.title}
                 </h3>
-                <p
-                  className="mt-3 text-ink-soft leading-[1.6]"
-                  style={{ fontSize: '1rem' }}
-                >
+                <p className="text-ink-soft leading-[1.65]" style={{ fontSize: '1rem' }}>
                   {p.text}
                 </p>
               </article>
@@ -257,73 +166,90 @@ export default function Page() {
         </div>
       </section>
 
-      <div className="py-24 md:py-32">
-        <Divider />
-      </div>
+      {/* Separador */}
+      <div className="h-1 w-20 bg-accent mx-auto" aria-hidden="true" />
 
-      {/* CONTACTO / UBICACIÓN */}
-      <section
-        id="contacto"
-        className="relative px-6 md:px-10 pb-32 md:pb-40"
-      >
+      {/* ───────── CONTACTO ───────── */}
+      <section id="contacto" className="py-24 md:py-32 px-6 md:px-12">
         <div className="max-w-3xl mx-auto">
-          <p className="font-body text-xs uppercase tracking-[0.2em] text-accent mb-6 text-center">
+          <p className="text-xs uppercase tracking-[0.2em] text-accent font-medium mb-6 text-center">
             — 03 / Cómo llegar
           </p>
           <h2
-            className="font-display font-black leading-[1.02] tracking-tight text-center"
+            className="font-display font-black text-ink leading-[1.05] tracking-tight text-center mb-6"
             style={{ fontSize: 'clamp(2rem, 4.5vw, 3.25rem)' }}
           >
-            Encuéntranos en <span className="italic">Madrid</span>
+            Encuéntranos en <span className="italic font-normal">Madrid</span>
           </h2>
           <p
-            className="mt-6 text-ink-soft leading-[1.7] text-center max-w-xl mx-auto"
+            className="text-ink-soft leading-[1.7] text-center max-w-xl mx-auto mb-12"
             style={{ fontSize: '1.0625rem' }}
           >
             Pásate sin prisa. La mesa está puesta y el fuego, encendido.
           </p>
 
-          <div className="mt-14 bg-surface rounded-2xl border border-line p-8 md:p-12">
+          <div className="relative bg-surface rounded-2xl border border-line p-8 md:p-12 overflow-hidden">
+            {/* Mapa placeholder gradient */}
             <div
-              className="aspect-[16/9] rounded-xl mb-8"
-              style={{
-                background:
-                  'radial-gradient(120% 80% at 30% 30%, rgba(168,56,40,0.18), transparent 60%), radial-gradient(120% 80% at 80% 70%, rgba(168,56,40,0.10), transparent 60%), linear-gradient(135deg, #e8c9b8 0%, #f4ecdf 100%)'
-              }}
               aria-hidden="true"
+              className="absolute inset-0 opacity-60"
+              style={{
+                background: 'radial-gradient(circle at 30% 20%, rgba(168,56,40,0.18), transparent 55%), radial-gradient(circle at 75% 80%, rgba(232,201,184,0.6), transparent 60%)',
+              }}
             />
+            <div className="relative space-y-8">
+              <div className="grid sm:grid-cols-2 gap-8">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.2em] text-ink-soft mb-2">Ciudad</p>
+                  <p className="font-display font-semibold text-ink" style={{ fontSize: '1.5rem' }}>Madrid</p>
+                  <p className="text-ink-soft text-sm mt-1">Dirección exacta próximamente</p>
+                </div>
+                <div>
+                  <p className="text-xs uppercase tracking-[0.2em] text-ink-soft mb-2">Teléfono</p>
+                  <a href={PHONE_TEL} className="contact-link font-display font-semibold text-ink block" style={{ fontSize: '1.5rem' }}>
+                    675 81 15 48
+                  </a>
+                </div>
+              </div>
 
-            <dl className="grid sm:grid-cols-3 gap-8 text-center sm:text-left">
-              <div>
-                <dt className="font-body text-xs uppercase tracking-[0.2em] text-ink-soft mb-2">
-                  Ciudad
-                </dt>
-                <dd className="font-display text-xl">Madrid</dd>
+              <div className="h-px bg-line" aria-hidden="true" />
+
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href={PHONE_TEL}
+                  className="cta-primary inline-flex items-center gap-2 bg-accent text-bg px-7 py-4 text-sm font-medium tracking-wide uppercase rounded-full"
+                >
+                  Llamar
+                  <span aria-hidden="true">→</span>
+                </a>
+                <a
+                  href={PHONE_WA}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cta-secondary inline-flex items-center gap-2 border border-ink/20 text-ink px-7 py-4 text-sm font-medium tracking-wide uppercase rounded-full"
+                >
+                  WhatsApp
+                </a>
               </div>
-              <div>
-                <dt className="font-body text-xs uppercase tracking-[0.2em] text-ink-soft mb-2">
-                  Teléfono
-                </dt>
-                <dd className="font-display text-xl text-ink-soft">[Próximamente]</dd>
-              </div>
-              <div>
-                <dt className="font-body text-xs uppercase tracking-[0.2em] text-ink-soft mb-2">
-                  Email
-                </dt>
-                <dd className="font-display text-xl text-ink-soft">[Próximamente]</dd>
-              </div>
-            </dl>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="border-t border-line px-6 md:px-10 py-10">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-4 items-center justify-between">
-          <p className="font-display italic font-black text-xl">Rosi La Loca</p>
-          <p className="font-body text-xs uppercase tracking-[0.2em] text-ink-soft">
-            © {new Date().getFullYear()} · Cocina viva en Madrid
-          </p>
+      {/* ───────── FOOTER ───────── */}
+      <footer className="border-t border-line py-12 px-6 md:px-12">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div>
+            <p className="font-display italic font-black text-ink text-2xl leading-none">Rosi La Loca</p>
+            <p className="text-xs uppercase tracking-[0.2em] text-ink-soft mt-2">Cocina viva · Madrid</p>
+          </div>
+          <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm">
+            <a href="#sobre" className="contact-link text-ink-soft">Sobre</a>
+            <a href="#cocina" className="contact-link text-ink-soft">Cocina</a>
+            <a href="#contacto" className="contact-link text-ink-soft">Contacto</a>
+            <a href={PHONE_TEL} className="contact-link text-ink-soft">675 81 15 48</a>
+          </div>
+          <p className="text-xs text-ink-soft">© {new Date().getFullYear()} Rosi La Loca</p>
         </div>
       </footer>
     </main>
